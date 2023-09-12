@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework.generics import *
 from rest_framework.permissions import *
 from rest_framework.response import Response
@@ -35,6 +36,18 @@ class ProductViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(seller=self.request.user)
 
+    def list(self, request, *args, **kwargs):
+        cache_key = 'product_list'
+        cached_data = cache.get(cache_key)
+
+        if cached_data is not None:
+            return Response(cached_data)
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = serializer.data
+        cache.set(cache_key, data, 3600)
+        return Response(data)
+
 
 class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
@@ -54,6 +67,18 @@ class CategoryListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     filter_backends = [SearchFilter]
     search_fields = ['slug']
+
+    def list(self, request, *args, **kwargs):
+        cache_key = 'category_list'
+        cached_data = cache.get(cache_key)
+
+        if cached_data is not None:
+            return Response(cached_data)
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        data = serializer.data
+        cache.set(cache_key, data, 3600)
+        return Response(data)
 
 
 class CategoryAddAPIView(CreateAPIView):
@@ -188,6 +213,3 @@ class CreateCheckoutSession(CreateAPIView):
         except Exception as e:
             print(e)
             return Response({'error': 'Failed to create checkout session'}, status=500)
-
-
-
