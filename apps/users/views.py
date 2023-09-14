@@ -10,8 +10,8 @@ from rest_framework import status
 import stripe
 
 from online_shop import settings
-from product.models import Review
-from product.serializers import ReviewSerializer
+from apps.product.models import Review
+from apps.product.serializers import ReviewSerializer
 from .serializers import *
 from .models import *
 from .permissions import *

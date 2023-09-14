@@ -2,7 +2,7 @@ from django.db.models import Avg, Sum
 from django.urls import reverse
 from rest_framework.serializers import *
 from .models import Product, Category, Review, CartItem, Cart
-from users.models import MyUser
+from apps.users.models import MyUser
 
 
 class UserSerializer(ModelSerializer):

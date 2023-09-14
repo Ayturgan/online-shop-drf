@@ -11,7 +11,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
-        from users.models import Profile
+        from apps.users.models import Profile
         Profile.objects.create(user=user)
         return user
 

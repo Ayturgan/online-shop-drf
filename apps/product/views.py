@@ -11,7 +11,7 @@ import stripe
 from online_shop import settings
 from .serializers import *
 from .models import *
-from users.permissions import IsOwnerOrAdmin, IsProductOwnerOrReadOnly, IsAdminOrReadOnly, IsSellerOrReadOnly, \
+from apps.users.permissions import IsOwnerOrAdmin, IsProductOwnerOrReadOnly, IsAdminOrReadOnly, IsSellerOrReadOnly, \
     IsProductOwnerOrAdminOrReadOnly
 
 stripe.api_key = settings.STRIPE_SECRET_KEY

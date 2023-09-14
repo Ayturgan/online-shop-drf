@@ -1,5 +1,5 @@
 from django.db.models import *
-from users.models import *
+from apps.users.models import *
 
 
 class Category(Model):

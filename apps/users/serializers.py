@@ -7,7 +7,7 @@ from rest_framework.serializers import *
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from product.models import Cart
+from apps.product.models import Cart
 from .models import MyUser, Notice, Profile
 
 

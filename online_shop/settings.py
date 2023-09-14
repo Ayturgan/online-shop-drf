@@ -37,13 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # apps
-    'users',
-    'product',
+    'apps.users',
+    'apps.product',
 
     # installed
     'rest_framework',
     'rest_framework_simplejwt',
-    'rest_auth',
 ]
 
 AUTH_USER_MODEL = 'users.MyUser'
